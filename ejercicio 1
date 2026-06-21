@@ -1,0 +1,45 @@
+#include <iostream>
+#include <string>
+#include <cctype> // Necesaria para usar la función toupper()
+
+using namespace std;
+
+// 1. FUNCIÓN PARA PEDIR EL TEXTO AL USUARIO
+void ingresarTexto(string &texto) {
+    cout << "Introduce el texto que deseas convertir: ";
+    // Usamos getline para poder capturar la frase completa con sus espacios
+    getline(cin, texto);
+}
+
+// 2. FUNCIÓN PARA CONVERTIR EL TEXTO A MAYÚSCULAS
+// Modifica la cadena directamente usando paso por referencia (&)
+void convertirAMayusculas(string &texto) {
+    // Usamos .length() para saber cuántas letras tiene la cadena en total
+    int totalCaracteres = texto.length();
+
+    // Recorremos el texto posición por posición utilizando un ciclo for
+    for (int i = 0; i < totalCaracteres; i++) {
+        // texto.at(i) accede al carácter en la posición 'i'
+        // toupper() toma ese carácter y lo transforma a su versión en mayúscula
+        texto.at(i) = toupper(texto.at(i));
+    }
+}
+
+// 3. FUNCIÓN PARA MOSTRAR EL RESULTADO
+void mostrarResultado(string textoModificado) {
+    cout << "\nSalida esperada: " << textoModificado << endl;
+}
+
+// 4. FUNCIÓN PRINCIPAL
+int main() {
+    string miTexto; // Variable para almacenar la cadena original
+
+    // El int main coordina el flujo llamando únicamente a las funciones:
+    ingresarTexto(miTexto);
+
+    convertirAMayusculas(miTexto);
+
+    mostrarResultado(miTexto);
+
+    return 0;
+}
