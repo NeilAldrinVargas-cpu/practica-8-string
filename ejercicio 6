@@ -1,0 +1,55 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// 1. FUNCIÓN PARA PEDIR EL TEXTO
+void ingresarTexto(string &texto) {
+    cout << "Introduce una cadena de texto: ";
+    getline(cin, texto);
+}
+
+// 2. FUNCIÓN PARA ELIMINAR LAS VOCALES
+string eliminarVocales(string texto) {
+    string resultado = ""; // Aquí construiremos la nueva cadena sin vocales
+    int totalCaracteres = texto.length(); // Método obligatorio
+
+    // Recorremos la cadena carácter por carácter
+    for (int i = 0; i < totalCaracteres; i++) {
+        char caracterActual = texto.at(i); // Método obligatorio
+
+        // Convertimos temporalmente a minúscula para facilitar la validación
+        char minuscula = tolower(caracterActual);
+
+        // Si NO es una vocal (ni minúscula, ni mayúscula, ni con acento según el ejemplo)
+        if (minuscula != 'a' && minuscula != 'e' && minuscula != 'i' && minuscula != 'o' && minuscula != 'u' &&
+            minuscula != 'á' && minuscula != 'é' && minuscula != 'í' && minuscula != 'ó' && minuscula != 'ú') {
+            
+            // Usamos operator+ para construir la nueva cadena (método obligatorio/sugerido)
+            resultado = resultado + caracterActual;
+        }
+    }
+
+    return resultado;
+}
+
+// 3. FUNCIÓN PARA MOSTRAR EL RESULTADO
+void mostrarResultado(string textoSinVocales) {
+    cout << "Salida esperada: " << textoSinVocales << endl;
+}
+
+// 4. FUNCIÓN PRINCIPAL (Solo coordina el flujo)
+int main() {
+    string miTexto;
+
+    // 1. Captura de datos
+    ingresarTexto(miTexto);
+    
+    // 2. Procesamiento
+    string textoProcesado = eliminarVocales(miTexto);
+    
+    // 3. Salida de datos
+    mostrarResultado(textoProcesado);
+
+    return 0;
+}
