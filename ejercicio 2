@@ -1,0 +1,51 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// 1. FUNCIÓN PARA PEDIR EL TEXTO
+void ingresarTexto(string &texto) {
+    cout << "Introduce una cadena de texto: ";
+    getline(cin, texto); // Captura la frase completa con sus espacios
+}
+
+// 2. FUNCIÓN PARA CONTAR LAS PALABRAS
+int contarPalabras(string texto) {
+    // Si el usuario no escribió nada, hay 0 palabras de inmediato
+    if (texto.empty()) {
+        return 0;
+    }
+
+    int contadorEspacios = 0;
+    int totalCaracteres = texto.length(); // Método obligatorio
+
+    // Recorremos el texto para contar los espacios intermedios
+    for (int i = 0; i < totalCaracteres; i++) {
+        // .at(i) es el método obligatorio para revisar cada letra
+        if (texto.at(i) == ' ') {
+            contadorEspacios++;
+        }
+    }
+
+    // El total de palabras es el número de espacios más 1
+    return contadorEspacios + 1;
+}
+
+// 3. FUNCIÓN PARA MOSTRAR EL RESULTADO
+void mostrarResultado(int totalPalabras) {
+    cout << "Salida esperada: " << totalPalabras << " palabras" << endl;
+}
+
+// 4. FUNCIÓN PRINCIPAL
+int main() {
+    string miTexto;
+
+    // El int main solo coordina llamando a las funciones:
+    ingresarTexto(miTexto);
+
+    int palabras = contarPalabras(miTexto);
+
+    mostrarResultado(palabras);
+
+    return 0;
+}
