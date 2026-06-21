@@ -1,0 +1,61 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// 1. FUNCIÓN PARA PEDIR LA CADENA DE TEXTO
+void ingresarTexto(string &texto) {
+    cout << "Entrada: ";
+    getline(cin, texto); // Captura la palabra o frase completa
+}
+
+// 2. FUNCIÓN PARA INVERTIR LA CADENA
+// Aplica el método obligatorio 'at(pos)' y la concatenación 'operator+'
+string invertirCadena(string texto) {
+    string textoInvertido = ""; // Empezamos con una cadena vacía
+    int totalCaracteres = texto.length(); // Método obligatorio
+
+    // Recorremos el texto original desde el final (totalCaracteres - 1) hasta el principio (0)
+    for (int i = totalCaracteres - 1; i >= 0; i--) {
+        // 'operator+' une el carácter extraído con .at(i) a la nueva cadena
+        textoInvertido = textoInvertido + texto.at(i);
+    }
+
+    return textoInvertido;
+}
+
+// 3. FUNCIÓN PARA VERIFICAR SI ES CAPICÚA O PALÍNDROMA
+bool esPalindroma(string original, string invertida) {
+    // Si ambas cadenas contienen exactamente las mismas letras en el mismo orden
+    if (original == invertida) {
+        return true;
+    }
+    return false;
+}
+
+// 4. FUNCIÓN PARA MOSTRAR LOS RESULTADOS
+void mostrarResultados(string invertida, bool esCapicua) {
+    cout << "Salida esperada: " << invertida << endl;
+
+    if (esCapicua) {
+        cout << "Nota: La palabra es capicúa o palíndroma." << endl;
+    } else {
+        cout << "Nota: La palabra NO es capicúa." << endl;
+    }
+}
+
+// 5. FUNCIÓN PRINCIPAL
+int main() {
+    string cadenaOriginal;
+
+    // El int main sigue ejecutando los módulos de forma limpia y ordenada:
+    ingresarTexto(cadenaOriginal);
+
+    string cadenaInvertida = invertirCadena(cadenaOriginal);
+
+    bool resultadoCapicua = esPalindroma(cadenaOriginal, cadenaInvertida);
+
+    mostrarResultados(cadenaInvertida, resultadoCapicua);
+
+    return 0;
+}
