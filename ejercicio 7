@@ -1,0 +1,55 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// 1. FUNCIÓN PARA PEDIR EL TEXTO
+void ingresarTexto(string &texto) {
+    cout << "Introduce una palabra: ";
+    cin >> texto; // Usamos cin directamente ya que el ejemplo pide una sola palabra
+}
+
+// 2. FUNCIÓN PARA ORDENAR LOS CARACTERES ALFABÉTICAMENTE
+string ordenarCadena(string texto) {
+    int totalCaracteres = texto.length(); // Método obligatorio
+    char auxiliar; // Variable auxiliar obligatoria para hacer el intercambio de letras
+
+    // Algoritmo de ordenamiento (Método de la Burbuja)
+    for (int i = 0; i < totalCaracteres - 1; i++) {
+        for (int j = 0; j < totalCaracteres - i - 1; j++) {
+            
+            // Comparamos si el carácter actual es mayor al siguiente en el alfabeto
+            // .at(pos) es obligatorio para acceder a cada posición
+            if (texto.at(j) > texto.at(j + 1)) {
+                
+                // Intercambio de posiciones usando la variable auxiliar
+                auxiliar = texto.at(j);
+                texto.at(j) = texto.at(j + 1);
+                texto.at(j + 1) = auxiliar;
+            }
+        }
+    }
+
+    return texto;
+}
+
+// 3. FUNCIÓN PARA MOSTRAR EL RESULTADO
+void mostrarResultado(string textoOrdenado) {
+    cout << "Salida esperada: " << textoOrdenado << endl;
+}
+
+// 4. FUNCIÓN PRINCIPAL (Solo coordina el flujo de ejecución)
+int main() {
+    string miTexto;
+
+    // 1. Captura de datos
+    ingresarTexto(miTexto);
+    
+    // 2. Procesamiento (Ordenamiento)
+    string textoProcesado = ordenarCadena(miTexto);
+    
+    // 3. Salida de datos
+    mostrarResultado(textoProcesado);
+
+    return 0;
+}
