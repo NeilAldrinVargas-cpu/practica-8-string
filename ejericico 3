@@ -1,0 +1,51 @@
+#include <iostream>
+#include <string>
+#include <cctype> // Necesaria para usar la función toupper()
+
+using namespace std;
+
+// 1. FUNCIÓN PARA PEDIR EL TEXTO AL USUARIO
+void ingresarTexto(string &texto) {
+    cout << "Introduce una cadena de texto en minúsculas: ";
+    getline(cin, texto); // Captura la frase completa con espacios
+}
+
+// 2. FUNCIÓN PARA CONVERTIR LA PRIMERA LETRA DE CADA PALABRA
+void capitalizarPalabras(string &texto) {
+    // Si la cadena está vacía, no hay nada que procesar
+    if (texto.empty()) {
+        return;
+    }
+
+    // Regala 1: La primera letra de toda la cadena (posición 0) siempre se capitaliza
+    texto.at(0) = toupper(texto.at(0));
+
+    int totalCaracteres = texto.length(); // Método obligatorio
+
+    // Recorremos el resto del texto empezando desde la posición 1
+    for (int i = 1; i < totalCaracteres; i++) {
+        // Regla 2: Si el carácter anterior es un espacio, el carácter actual es el inicio de una palabra
+        if (texto.at(i - 1) == ' ') {
+            texto.at(i) = toupper(texto.at(i)); // Método obligatorio + complemento
+        }
+    }
+}
+
+// 3. FUNCIÓN PARA MOSTRAR EL RESULTADO
+void mostrarResultado(string textoModificado) {
+    cout << "\nSalida esperada: " << textoModificado << endl;
+}
+
+// 4. FUNCIÓN PRINCIPAL (Solo llama a las funciones)
+int main() {
+    string miTexto;
+
+    // El int main mantiene su rol de director ordenado:
+    ingresarTexto(miTexto);
+    
+    capitalizarPalabras(miTexto);
+    
+    mostrarResultado(miTexto);
+
+    return 0;
+}
