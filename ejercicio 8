@@ -1,0 +1,59 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// 1. FUNCIÓN PARA PEDIR LA CANTIDAD DE PALABRAS
+void ingresarCantidad(int &n) {
+    cout << "Introduce la cantidad de palabras (n): ";
+    cin >> n;
+}
+
+// 2. FUNCIÓN PARA PEDIR LAS PALABRAS Y CONSTRUIR LA FRASE
+string formarFrase(int n) {
+    string fraseCompleta = "";
+    string palabraActual;
+
+    cout << "Introduce las " << n << " palabras una por una:" << endl;
+    
+    for (int i = 0; i < n; i++) {
+        cout << "Palabra " << (i + 1) << ": ";
+        cin >> palabraActual;
+
+        // Si es la primera palabra, la asignamos directamente
+        if (fraseCompleta.length() == 0) {
+            fraseCompleta = palabraActual;
+        } 
+        // Para las siguientes palabras, añadimos un espacio y luego la palabra
+        else {
+            fraseCompleta = fraseCompleta + " "; // Usamos operator+ para el espacio
+            fraseCompleta.append(palabraActual); // Usamos el método obligatorio .append()
+        }
+    }
+
+    // Agregamos el punto final tal como se muestra en la salida esperada del ejemplo
+    fraseCompleta.append("."); 
+
+    return fraseCompleta;
+}
+
+// 3. FUNCIÓN PARA MOSTRAR EL RESULTADO
+void mostrarResultado(string fraseFinal) {
+    cout << "Salida esperada: " << fraseFinal << endl;
+}
+
+// 4. FUNCIÓN PRINCIPAL (Solo coordina el flujo del programa)
+int main() {
+    int cantidadPalabras = 0;
+
+    // 1. Captura de la cantidad 'n'
+    ingresarCantidad(cantidadPalabras);
+    
+    // 2. Procesamiento e ingreso de las palabras
+    string resultado = formarFrase(cantidadPalabras);
+    
+    // 3. Salida de datos
+    mostrarResultado(resultado);
+
+    return 0;
+}
