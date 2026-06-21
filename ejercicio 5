@@ -1,0 +1,46 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// 1. FUNCIÓN PARA PEDIR LAS DOS CADENAS
+void ingresarCadenas(string &cadena1, string &cadena2) {
+    cout << "Introduce la primera cadena: ";
+    getline(cin, cadena1);
+
+    cout << "Introduce la segunda cadena: ";
+    getline(cin, cadena2);
+}
+
+// 2. FUNCIÓN PARA UNIR LAS CADENAS
+string unirCadenas(string cadena1, string cadena2) {
+    // Usamos el método obligatorio .append() para mezclar ambas cadenas
+    // También se podría usar: string resultado = cadena1 + cadena2; (operator+)
+    string resultado = cadena1.append(cadena2);
+
+    return resultado;
+}
+
+// 3. FUNCIÓN PARA MOSTRAR EL RESULTADO
+void mostrarResultado(string cadenaUnida) {
+    cout << "Salida esperada: " << cadenaUnida << endl;
+
+    // Mostramos opcionalmente el tamaño usando .length() o .size() como pide el ejercicio
+    cout << "(Longitud del texto final: " << cadenaUnida.length() << " caracteres)" << endl;
+}
+
+// 4. FUNCIÓN PRINCIPAL (Solo coordina llamando a las funciones)
+int main() {
+    string texto1, texto2;
+
+    // 1. Captura de datos
+    ingresarCadenas(texto1, texto2);
+
+    // 2. Procesamiento
+    string resultadoFinal = unirCadenas(texto1, texto2);
+
+    // 3. Salida de datos
+    mostrarResultado(resultadoFinal);
+
+    return 0;
+}
