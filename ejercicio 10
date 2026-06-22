@@ -1,0 +1,68 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// FUNCIÓN AUXILIAR: Verifica si un carácter es una vocal (facilita la lógica principal)
+bool esVocal(char c) {
+    char minuscula = tolower(c);
+    return (minuscula == 'a' || minuscula == 'e' || minuscula == 'i' || minuscula == 'o' || minuscula == 'u' ||
+            minuscula == 'á' || minuscula == 'é' || minuscula == 'í' || minuscula == 'ó' || minuscula == 'ú');
+}
+
+// 1. FUNCIÓN PARA PEDIR EL TEXTO
+void ingresarTexto(string &texto) {
+    cout << "Introduce una cadena de texto: ";
+    getline(cin, texto);
+}
+
+// 2. FUNCIÓN PARA CONTAR Y EXTRAER LAS VOCALES JUNTAS
+int analizarVocalesJuntas(string texto, string &vocalesEncontradas) {
+    int contador = 0;
+    int totalCaracteres = texto.length(); // Método obligatorio
+    vocalesEncontradas = ""; // Aquí acumularemos las parejas encontradas (ej: "ue, io")
+
+    // Recorremos la cadena buscando parejas. Terminamos en totalCaracteres - 1 para no salirnos del rango.
+    for (int i = 0; i < totalCaracteres - 1; i++) {
+        // .at(pos) es obligatorio para revisar la posición actual y la siguiente
+        if (esVocal(texto.at(i)) && esVocal(texto.at(i + 1))) {
+            contador++;
+
+            // Usamos .substr(inicio, cantidad) de forma obligatoria para extraer las 2 letras juntas
+            string pareja = texto.substr(i, 2);
+
+            if (vocalesEncontradas.length() == 0) {
+                vocalesEncontradas = pareja;
+            } else {
+                vocalesEncontradas = vocalesEncontradas + ", " + pareja;
+            }
+            
+            // Avanzamos el índice una posición extra para evitar contar tres vocales seguidas como dos parejas solapadas
+            i++; 
+        }
+    }
+
+    return contador;
+}
+
+// 3. FUNCIÓN PARA MOSTRAR EL RESULTADO
+void mostrarResultado(int cantidad, string parejas) {
+    cout << "Salida esperada: " << cantidad << " vocales juntas: " << parejas << endl;
+}
+
+// 4. FUNCIÓN PRINCIPAL (Solo coordina el flujo de las llamadas)
+int main() {
+    string miTexto;
+    string parejasDetectadas;
+
+    // 1. Captura de datos
+    ingresarTexto(miTexto);
+    
+    // 2. Procesamiento (Análisis de vocales contiguas)
+    int totalParejas = analizarVocalesJuntas(miTexto, parejasDetectadas);
+    
+    // 3. Salida de datos
+    mostrarResultado(totalParejas, parejasDetectadas);
+
+    return 0;
+}
