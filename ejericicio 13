@@ -1,0 +1,49 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// 1. Aquí solo le pedimos al usuario que escriba los textos
+void ingresarDatos(string &subcadenaA, string &cadenaB) {
+    cout << "Introduce la subcadena a buscar (a): ";
+    getline(cin, subcadenaA); // Guarda por ejemplo "oool"
+    
+    cout << "Introduce la cadena principal (b): ";
+    getline(cin, cadenaB);    // Guarda por ejemplo "hooola"
+}
+
+// 2. Aquí se hace la magia de la búsqueda
+int BuscarSubCadena(string subcadenaA, string cadenaB) {
+    // .find() busca "oool" dentro de "hooola" y nos da el número de asiento
+    size_t posicion = cadenaB.find(subcadenaA);
+    
+    // Si .find() no encuentra nada, devuelve un error llamado 'string::npos'
+    if (posicion == string::npos) {
+        return -1; // Devolvemos -1 si no existía en el tren
+    }
+    
+    // Si sí lo encontró, devolvemos el número de asiento (convertido a número entero)
+    return static_cast<int>(posicion);
+}
+
+// 3. Aquí solo imprimimos el resultado en la pantalla
+void mostrarResultado(int posicion) {
+    cout << "Salida esperada: " << posicion << endl;
+}
+
+// 4. El "Director de Orquesta" (No hace cálculos, solo llama a los de arriba)
+int main() {
+    string subcadenaA;
+    string cadenaB;
+
+    // Paso 1: Pedir los textos
+    ingresarDatos(subcadenaA, cadenaB);
+    
+    // Paso 2: Buscar y guardar el número de asiento en 'resultadoFinal'
+    int resultadoFinal = BuscarSubCadena(subcadenaA, cadenaB);
+    
+    // Paso 3: Mostrar ese número en la pantalla
+    mostrarResultado(resultadoFinal);
+
+    return 0;
+}
