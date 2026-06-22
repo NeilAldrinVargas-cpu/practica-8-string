@@ -1,0 +1,60 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// 1. FUNCIÓN PARA PEDIR LOS DATOS
+void ingresarDatos(string &texto, int &desplazamiento) {
+    cout << "Introduce el texto a codificar: ";
+    getline(cin, texto);
+
+    cout << "Introduce la cantidad de desplazamiento (c): ";
+    cin >> desplazamiento;
+}
+
+// 2. FUNCIÓN SOLICITADA: Codifica
+string Codifica(string texto, int c) {
+    // Recorremos la cadena posición por posición usando .length()
+    for (int i = 0; i < texto.length(); i++) {
+        char caracterActual = texto.at(i); // Inspeccionamos la posición actual
+
+        // Caso 1: Si es una letra minúscula (Rangos ASCII de 'a' hasta 'z')
+        if (caracterActual >= 'a' && caracterActual <= 'z') {
+            // 1. Llevamos la letra a un rango de 0 a 25 (restando 'a')
+            // 2. Le sumamos el desplazamiento 'c'
+            // 3. Usamos % 26 para dar la vuelta si se pasa de la 'z'
+            // 4. Regresamos al valor ASCII original (sumando 'a')
+            texto.at(i) = ((caracterActual - 'a' + c) % 26) + 'a';
+        }
+        // Caso 2: Si es una letra mayúscula (Rangos ASCII de 'A' hasta 'Z')
+        else if (caracterActual >= 'A' && caracterActual <= 'Z') {
+            texto.at(i) = ((caracterActual - 'A' + c) % 26) + 'A';
+        }
+
+        // Caso 3: Si no es una letra (espacios, comas, etc.), NO SE HACE NADA.
+    }
+
+    return texto;
+}
+
+// 3. FUNCIÓN PARA MOSTRAR EL RESULTADO
+void mostrarResultado(string textoCodificado) {
+    cout << "Salida esperada: " << textoCodificado << endl;
+}
+
+// 4. FUNCIÓN PRINCIPAL (Solo coordina)
+int main() {
+    string textoOriginal;
+    int desplazamiento;
+
+    // 1. Captura de datos
+    ingresarDatos(textoOriginal, desplazamiento);
+
+    // 2. Procesamiento
+    string resultadoFinal = Codifica(textoOriginal, desplazamiento);
+
+    // 3. Salida de datos
+    mostrarResultado(resultadoFinal);
+
+    return 0;
+}
