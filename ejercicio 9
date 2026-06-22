@@ -1,0 +1,67 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// 1. FUNCIÓN PARA PEDIR LOS DOS CONJUNTOS DE CARACTERES
+void ingresarConjuntos(string &A, string &B) {
+    cout << "Introduce los caracteres del conjunto A (sin espacios ni comas): ";
+    cin >> A;
+    
+    cout << "Introduce los caracteres del conjunto B (sin espacios ni comas): ";
+    cin >> B;
+}
+
+// 2. FUNCIÓN PARA OBTENER LA INTERSECCIÓN DE AMBOS CONJUNTOS
+string obtenerInterseccion(string A, string B) {
+    string C = ""; // Aquí guardaremos los caracteres que se repiten
+    int totalA = A.length(); // Método obligatorio
+
+    // Recorremos cada elemento del conjunto A
+    for (int i = 0; i < totalA; i++) {
+        char elementoActual = A.at(i); // Método obligatorio
+
+        // Buscamos si el elemento de A existe dentro de la cadena B
+        // .find() devuelve string::npos si NO encuentra el elemento
+        if (B.find(elementoActual) != string::npos) {
+            
+            // Si el elemento ya se agrego a C, evitamos duplicados en la respuesta
+            if (C.find(elementoActual) == string::npos) {
+                // Usamos operator+ para construir el conjunto resultante
+                C = C + elementoActual; 
+            }
+        }
+    }
+
+    return C;
+}
+
+// 3. FUNCIÓN PARA MOSTRAR EL RESULTADO CON FORMATO DE CONJUNTO
+void mostrarResultado(string C) {
+    cout << "Salida esperada: C = { ";
+    int totalC = C.length();
+    
+    for (int i = 0; i < totalC; i++) {
+        cout << C.at(i);
+        if (i < totalC - 1) {
+            cout << ", "; // Imprime una coma de separación si no es el último elemento
+        }
+    }
+    cout << " }" << endl;
+}
+
+// 4. FUNCIÓN PRINCIPAL (Solo coordina la ejecución)
+int main() {
+    string conjuntoA, conjuntoB;
+
+    // 1. Captura de datos
+    ingresarConjuntos(conjuntoA, conjuntoB);
+    
+    // 2. Procesamiento (Intersección)
+    string conjuntoC = obtenerInterseccion(conjuntoA, conjuntoB);
+    
+    // 3. Salida de datos
+    mostrarResultado(conjuntoC);
+
+    return 0;
+}
