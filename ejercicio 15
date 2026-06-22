@@ -1,0 +1,54 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// 1. FUNCIÓN PARA PEDIR LA PALABRA
+void ingresarDatos(string &texto) {
+    cout << "Introduce una palabra: ";
+    cin >> texto; // Usamos cin directamente porque es una sola palabra
+}
+
+// 2. FUNCIÓN SOLICITADA: EsPalindromo
+bool EsPalindromo(string texto) {
+    string invertida = "";
+
+    // Recorremos la cadena desde la última posición (texto.length() - 1) hasta la 0
+    for (int i = texto.length() - 1; i >= 0; i--) {
+        // Usamos .at(i) para agarrar la letra y el operador '+' para ir armando la palabra al revés
+        invertida = invertida + texto.at(i); 
+    }
+
+    // Usamos .compare(). Si devuelve 0 significa que ambas cadenas son EXACTAMENTE iguales
+    if (texto.compare(invertida) == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// 3. FUNCIÓN PARA MOSTRAR EL RESULTADO
+void mostrarResultado(bool resultado) {
+    // Si el resultado es true imprime "true", si es false imprime "false"
+    if (resultado) {
+        cout << "Salida esperada: true" << endl;
+    } else {
+        cout << "Salida esperada: false" << endl;
+    }
+}
+
+// 4. FUNCIÓN PRINCIPAL (Solo coordina)
+int main() {
+    string palabra;
+
+    // 1. Captura de datos
+    ingresarDatos(palabra);
+    
+    // 2. Procesamiento (Guarda true o false)
+    bool esValido = EsPalindromo(palabra);
+    
+    // 3. Salida de datos
+    mostrarResultado(esValido);
+
+    return 0;
+}
