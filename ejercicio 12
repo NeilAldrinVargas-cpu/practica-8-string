@@ -1,0 +1,58 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// 1. FUNCIÓN PARA PEDIR LA CADENA Y EL CARÁCTER
+void ingresarDatos(string &texto, char &objetivo) {
+    cout << "Introduce una cadena de texto: ";
+    getline(cin, texto);
+    
+    cout << "Introduce el caracter que deseas borrar: ";
+    cin >> objetivo;
+}
+
+// 2. FUNCIÓN SOLICITADA: BorraCaracterDeCadena
+string BorraCaracterDeCadena(string texto, char objetivo) {
+    int i = 0;
+
+    // Usamos un bucle while controlado dinámicamente con .length()
+    while (i < texto.length()) { // .length() es método obligatorio
+        
+        // .at(i) es método obligatorio para inspeccionar la posición
+        if (texto.at(i) == objetivo) {
+            // Si coincide, borramos 1 carácter en la posición 'i'
+            texto.erase(i, 1); // .erase(pos, cantidad) es método obligatorio
+            
+            // IMPORTANTE: No aumentamos 'i' porque el siguiente carácter 
+            // se movió automáticamente a la posición actual 'i'.
+        } else {
+            // Si no coincide, avanzamos normalmente a la siguiente posición
+            i++;
+        }
+    }
+
+    return texto;
+}
+
+// 3. FUNCIÓN PARA MOSTRAR EL RESULTADO
+void mostrarResultado(string textoModificado) {
+    cout << "Salida esperada: " << textoModificado << endl;
+}
+
+// 4. FUNCIÓN PRINCIPAL (Solo coordina las llamadas lógicas)
+int main() {
+    string cadenaOriginal;
+    char caracterABorrar;
+
+    // 1. Captura de datos
+    ingresarDatos(cadenaOriginal, caracterABorrar);
+    
+    // 2. Procesamiento (Llamada a la función específica)
+    string resultadoFinal = BorraCaracterDeCadena(cadenaOriginal, caracterABorrar);
+    
+    // 3. Salida de datos
+    mostrarResultado(resultadoFinal);
+
+    return 0;
+}
