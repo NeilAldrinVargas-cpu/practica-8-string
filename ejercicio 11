@@ -1,0 +1,52 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+// 1. FUNCIÓN PARA PEDIR LOS DATOS DE ENTRADA
+void ingresarDatos(string &texto, int &posicion, int &longitud) {
+    cout << "Introduce la cadena de texto: ";
+    getline(cin, texto);
+    
+    cout << "Introduce la posicion de inicio (p): ";
+    cin >> posicion;
+    
+    cout << "Introduce la longitud a extraer (n): ";
+    cin >> longitud;
+}
+
+// 2. FUNCIÓN SOLICITADA: SubCadena
+string SubCadena(string texto, int p, int n) {
+    // Validación obligatoria usando .length() para no salirnos de los límites de la cadena
+    if (p < 0 || p >= texto.length()) {
+        return "Error: Posicion inicial fuera de rango.";
+    }
+    
+    // Extraemos la subcadena utilizando el método obligatorio .substr(inicio, cantidad)
+    string resultado = texto.substr(p, n);
+    
+    return resultado;
+}
+
+// 3. FUNCIÓN PARA MOSTRAR EL RESULTADO
+void mostrarResultado(string subcadenaExtraida) {
+    cout << "Salida esperada: " << subcadenaExtraida << endl;
+}
+
+// 4. FUNCIÓN PRINCIPAL (Solo coordina el flujo de las llamadas)
+int main() {
+    string cadenaOriginal;
+    int p = 0; // Posición de inicio
+    int n = 0; // Longitud a extraer
+
+    // 1. Captura de datos
+    ingresarDatos(cadenaOriginal, p, n);
+    
+    // 2. Procesamiento (Llamada a la función específica diseñada)
+    string resultadoFinal = SubCadena(cadenaOriginal, p, n);
+    
+    // 3. Salida de datos
+    mostrarResultado(resultadoFinal);
+
+    return 0;
+}
